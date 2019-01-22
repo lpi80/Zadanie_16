@@ -1,22 +1,38 @@
-let url = 'http://api.icndb.com/jokes/random';
+const tweetLink = "https://twitter.com/intent/tweet?text=";
+const quoteUrl = "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1";
 
-let button = document.getElementById('get-joke');
-button.addEventListener('click', function(){
-  getJoke();
-});
+function getQuote() {
+    fetch(quoteUrl, { cache: "no-store" })
+        .then(function(resp) {
+            return resp.json();
+        })
+        .then(createTweet);
+}
 
-let paragraph = document.getElementById('joke');
+function createTweet(input) {
+    const data = input[0];
 
-function getJoke() {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
-    xhr.addEventListener('load', function(){
-      let response = JSON.parse(xhr.response);
-      paragraph.innerHTML = response.value.joke;
+    let dataElement = document.createElement('div');
+    dataElement.innerHTML = data.content;
+    const quoteText = dataElement.innerText.trim();
+    let quoteAuthor = data.title;
+    if (!quoteAuthor.length) {
+        quoteAuthor = "Unknown author";
+    }
+    const tweetText = "Quote of the day - " + quoteText + " Author: " + quoteAuthor;
+    if (tweetText.length > 140) {
+        getQuote();
+    } else {
+        const tweet = tweetLink + encodeURIComponent(tweetText);
+        document.querySelector('.quote').innerText = quoteText;
+        document.querySelector('.author').innerText = "Author: " + quoteAuthor;
+        document.querySelector('.tweet').setAttribute('href', tweet);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    getQuote();
+    document.querySelector('.trigger').addEventListener('click', function() {
+        getQuote();
     });
-    xhr.send();
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    getJoke();
-  });
+});
