@@ -1,9 +1,74 @@
-body {
-    background: lightgrey;
+$width: 700px;
+
+@import "normalize";
+@import "layout";
+
+* {
+    box-sizing: border-box;
 }
-.flag {
-    width: 75px; /* full width */
-    height: 50px; /* height of carousel */
-    background-size: contain;
-    background-repeat: no-repeat;
+
+ul,li {
+    list-style: none;
+    padding-inline-start: 0;
+};
+
+.country {
+    margin-top: 20px;
+    width: $width;
+	@include myFlexRow(flex-start, flex-start, flex-start, row, 30px);
+    
+    &__head{
+        @include myFlexRow(flex-start, center, flex-start, row, 50px);        
+    }
+
+    &__name {
+        font-size: 25px;
+        font-weight: bold;
+        padding-left: 10px;
+        color: blue;
+    }
+
+    &__flag {
+        width: 75px; /* full width */
+        height: 45px; /* height of carousel */
+        //background-size: auto;
+        object-fit: cover;
+        background-repeat: no-repeat;
+        box-shadow: 1px 1px 1px gray;
+    }
+
+    &__info {
+        @include myFlexRow(flex-start, center, flex-start, row, 30px);
+        background: darkblue;
+        color: white;
+        width: 100%;
+        margin: 0;
+    }
+
+    &__column {
+        width: $width;
+        background: yellow;
+        color: darkblue;
+        @include myFlexRow(flex-start, flex-start, flex-start, column, 30px);
+    }
+
+    &__row {
+        width: $width;
+        @include myFlexRow(flex-start, flex-start, flex-start, row, 30px);
+        &--head {
+            width: 30%;
+            flex: 1 1 auto;
+            background: orange;
+            height: 30px;
+            padding: 10px;
+        }
+
+        &--value {
+            width: 70%;
+            flex: 1 1 auto;
+            height: 30px;
+            padding: 10px;
+        }
+        
+    }
 }

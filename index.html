@@ -19,33 +19,34 @@
 
     <script id="country-template" type="x-tmpl-mustache">
         <div class="country">
-            <div style="background-image: url({{ flag }})" class="flag"></div>
-            <div class="name">{{ name }}</div>
-            <div>
-                <p class="info">Background information:</p>
-                <ul class="column">
-                    <li class="row">
-                        <div class="head">Capital<div>
-                        <div class="value">{{ capital }}    
-                    </li>
-                    <li class="row">
-                        <div class="head">Land area<div>
-                        <div class="value">{{ area }}    
-                    </li>
-                    <li class="row">
-                        <div class="head">Population<div>
-                        <div class="value">{{ population }}    
-                    </li>
-                    <li class="row">
-                        <div class="head">Language(s)<div>
-                        <div class="value">{{ language }}    
-                    </li>
-                    <li class="row">
-                        <div class="head">Currency<div>
-                        <div class="value">{{ currency }}    
-                    </li>
-                </ul>
-            </div>
+            <div class="country__head">
+               <img src="{{ flag }}" alt="National flag" class="country__flag"> 
+                <div class="country__name">{{ name }}</div>
+            </div>    
+            <p class="country__info">Background information:</p>
+            <ul class="country__column">
+                <li class="country__row">
+                    <div class="country__row--head">Capital</div>
+                    <div class="country__row--value"> : {{ capital }}</div>    
+                </li>
+                <li class="country__row">
+                    <div class="country__row--head">Land area</div>
+                    <div class="country__row--value"> : {{ area }} sk. km</div>    
+                </li>
+                <li class="country__row">
+                    <div class="country__row--head">Population</div>
+                    <div class="country__row--value"> : {{ population }} millions</div>    
+                </li>
+                <li class="country__row">
+                    <div class="country__row--head">Language(s)</div>
+                    <div class="country__row--value"> : {{ language }}</div>    
+                </li>
+                <li class="country__row">
+                    <div class="country__row--head">Currency</div>
+                    <div class="country__row--value"> : {{ currency }}</div>    
+                </li>
+            </ul>
+            <p class="country__info"></p>
         </div>
     </script>
 
