@@ -1,6 +1,5 @@
 const url = 'https://restcountries.eu/rest/v2/name/';
 const countriesList = document.getElementById('countries');
-var test;
 document.getElementById('search').addEventListener('click', searchCountries);
 
 function searchCountries() {
@@ -27,10 +26,11 @@ function showCountriesList(resp) {
     countriesList.innerHTML = '';
     resp.forEach(function (item) {
         let languages = '';
-        if (item.languages.length > 1) {
-            for (let i=0; i < item.languages.length; i++) {
+        const length = item.languages.length;
+        if (length > 1) {
+            for (let i=0; i < length; i++) {
                 languages +=item.languages[i].name;
-                if (i < item.languages.length - 1) {
+                if (i < length - 1) {
                     languages += ', ';
                 }
             }
