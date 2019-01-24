@@ -3,7 +3,7 @@ const countriesList = document.getElementById('countries');
 document.getElementById('search').addEventListener('click', searchCountries);
 
 function searchCountries() {
-    const countryName = document.getElementById('country-name').value;
+    let countryName = document.getElementById('country-name').value;
     if (!countryName.length) countryName = 'Poland';
     fetch(url + countryName)
         .then(function (resp) {
@@ -14,7 +14,7 @@ function searchCountries() {
 
 function generateTemplate(name, data, basicElement) {
     const template = document.getElementById(name).innerHTML;
-    const element = document.createElement(basicElement || 'li');
+    let element = document.createElement(basicElement || 'li');
 
     Mustache.parse(template);
     element.innerHTML = Mustache.render(template, data);
