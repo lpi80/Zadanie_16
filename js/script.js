@@ -22,8 +22,15 @@ function generateTemplate(name, data, basicElement) {
     return element;
 }
 
+function clear(element) {
+  while (element.children.length > 0) {
+    element.children[0].remove();
+  } 
+}
+
 function showCountriesList(resp) {
-    countriesList.innerHTML = '';
+    clear(countriesList);
+
     resp.forEach(function (item) {
         let languages = '';
         const length = item.languages.length;
