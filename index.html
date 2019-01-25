@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Kanban board</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
 
-  <script src="js/script.js"></script>
+<head>
+    <meta charset="utf-8">
+    <title>Zadanie 16</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Country search engine</h1>
+    <button id="search">Search a country</button>
+    <input id="country-name" type="text" />
+    <h2>List of countries</h2>
+    <ul id="countries">
+        <li>No data</li>
+    </ul>
+
+
+    <script id="country-template" type="x-tmpl-mustache">
+        <div class="country">
+            <div class="country__head">
+               <img src="{{ flag }}" alt="National flag" class="country__flag"> 
+                <div class="country__name">{{ name }}</div>
+            </div>    
+            <p class="country__info">Background information:</p>
+            <ul class="country__column">
+                <li class="country__row">
+                    <div class="country__row--head">Capital</div>
+                    <div class="country__row--value"> : {{ capital }}</div>    
+                </li>
+                <li class="country__row">
+                    <div class="country__row--head">Land area</div>
+                    <div class="country__row--value"> : {{ area }} sk. km</div>    
+                </li>
+                <li class="country__row">
+                    <div class="country__row--head">Population</div>
+                    <div class="country__row--value"> : {{ population }} millions</div>    
+                </li>
+                <li class="country__row">
+                    <div class="country__row--head">Language(s)</div>
+                    <div class="country__row--value"> : {{ language }}</div>    
+                </li>
+                <li class="country__row">
+                    <div class="country__row--head">Currency</div>
+                    <div class="country__row--value"> : {{ currency }}</div>    
+                </li>
+            </ul>
+            <p class="country__info"></p>
+        </div>
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
