@@ -34,13 +34,16 @@ function Column(id, name) {
 
 			self.addCard(new Card(cardName));
 		}
-	});
+	});	
 }
 
 Column.prototype = {
-	addCard: function (card) {
+	addCard: function(card) {
 		this.element.querySelector('ul').appendChild(card.element);
-	},
+		console.dir(this.element.querySelector('ul'));
+		console.dir(card);
+		console.log(this.element.querySelector('ul').appendChild(card.element))
+	  },
 	removeColumn: function () {
 		let self = this;
 		fetch(prefix + baseUrl + '/column/' + self.id, { method: 'DELETE', headers: myHeaders, cache: 'no-store' })
