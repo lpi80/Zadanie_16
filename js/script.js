@@ -28,8 +28,8 @@ function showCountriesList(resp) {
         let languages = '';
         const length = item.languages.length;
         if (length > 1) {
-            for (let i=0; i < length; i++) {
-                languages +=item.languages[i].name;
+            for (let i = 0; i < length; i++) {
+                languages += item.languages[i].name;
                 if (i < length - 1) {
                     languages += ', ';
                 }
@@ -42,6 +42,3 @@ function showCountriesList(resp) {
         countriesList.appendChild(element);
     });
 }
-
-
-
