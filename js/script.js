@@ -10,7 +10,6 @@ function getQuote() {
 }
 
 function createTweet(input) {
-    if (input.length > 0) {
         const data = input[0];
 
         let dataElement = document.createElement('div');
@@ -29,9 +28,7 @@ function createTweet(input) {
             document.querySelector('.author').innerText = "Author: " + quoteAuthor;
             document.querySelector('.tweet').setAttribute('href', tweet);
         }
-    } else {
-        console.log('Data error');
-    }
+       
 }
 
 document.addEventListener('DOMContentLoaded', function() {
