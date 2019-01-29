@@ -4,42 +4,45 @@ function Card(id, name) {
 
 	this.id = id;
 	this.name = name || 'No name given';
-	this.element = generateTemplate('card-template', { description: this.name }, 'li');
-
+	this.element = generateTemplate('card-template', { description: self.name }, 'li');
+			
 	this.element.querySelector('.card').addEventListener('click', function (event) {
 		event.stopPropagation();
+
+		if (event.target.classList.contains('btn-delete')) {
+			self.removeCard();
+		}
+
 		if (event.target.classList.contains('card-description')) {
-			let name = prompt("Enter the name of the card");
-			let data = new FormData();
-			self.name = name;
+			let newName = prompt("Enter the name of the card");
+			var data = new FormData();
 			data.append('id', self.id);
-			data.append('name', name);
+			data.append('name', newName);
 			data.append('bootcamp_kanban_column_id', self.element.parentNode.id);
-			fetch(baseUrl + '/card/' + self.id, {
+
+			fetch(prefix + baseUrl + '/card/' + self.id, {
 				method: 'PUT',
 				headers: myHeaders,
+				cache: 'no-store',
 				body: data,
 			})
 				.then(function (res) {
 					return res.json();
 				})
 				.then(function (resp) {
-					//if (resp.id == self.id) {
-						self.element.querySelector('.card-description').innerText = name;
-					//}
+					console.log(self);
+					self.element.querySelector('.card-description').innerText = newName;	
+					self.name = newName;
 				});
 		}
-	});	
+	});
 }
-Card.prototype = {
-	addCard: function (card) {
-		this.element.querySelector('ul').appendChild(card.element);
-	},
 
+Card.prototype = {
 	removeCard: function () {
 		let self = this;
 
-		fetch(baseUrl + '/card/' + self.id, { method: 'DEletE', headers: myHeaders})
+		fetch(prefix + baseUrl + '/card/' + self.id, { method: 'DELETE', headers: myHeaders, cache: 'no-store' })
 			.then(function (resp) {
 				return resp.json();
 			})

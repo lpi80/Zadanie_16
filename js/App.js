@@ -1,4 +1,11 @@
-fetch(baseUrl + '/board', { headers: myHeaders})
+const prefix = "https://cors-anywhere.herokuapp.com/";
+const baseUrl = 'https://kodilla.com/pl/bootcamp-api';
+const myHeaders = {
+	'X-Client-Id': '3592',
+	'X-Auth-Token': '9062d06ea6cee1c4f6ce0f65ab7f868c'
+};
+
+fetch(prefix + baseUrl + '/board', { headers: myHeaders, cache: "no-store" })
 	.then(function (resp) {
 		return resp.json();
 	})
@@ -23,8 +30,8 @@ function setupCards(col, cards) {
 
 // OGÓLNA FUNKCJA
 function randomString() {
-	const chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ'.split();
-	let str = '', i;
+	var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ'.split();
+	var str = '', i;
 	for (i = 0; i < 10; i++) {
 		str += chars[Math.floor(Math.random() * chars.length)];
 	}
@@ -32,8 +39,8 @@ function randomString() {
 }
 
 function generateTemplate(name, data, basicElement) {
-	const template = document.getElementById(name).innerHTML;
-	let element = document.createElement(basicElement || 'div');
+	var template = document.getElementById(name).innerHTML;
+	var element = document.createElement(basicElement || 'div');
 
 	Mustache.parse(template);
 	element.innerHTML = Mustache.render(template, data);

@@ -13,9 +13,10 @@ document.querySelector('#board .create-column').addEventListener('click', functi
 
     data.append('name', name);
  
-    fetch(baseUrl + '/column', {
+    fetch(prefix + baseUrl + '/column', {
         method: 'POST',
         headers: myHeaders,
+        cache: 'no-store',
         body: data,
     })
         .then(function (resp) {
@@ -27,9 +28,8 @@ document.querySelector('#board .create-column').addEventListener('click', functi
         });
 });
 
-
 function initSortable(id) {
-    const el = document.getElementById(id);
+    let el = document.getElementById(id);
     let sortable = Sortable.create(el, {
         group: 'kanban',
         sort: true
