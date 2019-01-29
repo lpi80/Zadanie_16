@@ -1,27 +1,35 @@
+const prefix = "https://cors-anywhere.herokuapp.com/";
+const baseUrl = prefix + 'https://kodilla.com/pl/bootcamp-api';
+const myHeaders = {
+	'X-Client-Id': '3592',
+	'X-Auth-Token': '9062d06ea6cee1c4f6ce0f65ab7f868c'
+};
+
 function Column(id, name) {
-	var self = this;
+	let self = this;
 
 	this.id = id;
 	this.name = name || 'No name given';
 	this.element = generateTemplate('column-template', { name: this.name, id: this.id });
 
 	this.element.querySelector('.column').addEventListener('click', function (event) {
+		event.stopPropagation();
+	
 		if (event.target.classList.contains('btn-delete')) {
 			self.removeColumn();
 		}
 
 		if (event.target.classList.contains('add-card')) {
 			let cardName = prompt("Enter the name of the card");
-			event.preventDefault();
 
-			var data = new FormData();
+			let data = new FormData();
 			data.append('name', cardName);
 			data.append('bootcamp_kanban_column_id', self.id);
 
-			fetch(prefix + baseUrl + '/card', {
+			fetch(baseUrl + '/card', {
 				method: 'POST',
 				headers: myHeaders,
-				cache: 'no-store', 
+				cache: "no-cache",
 				body: data,
 			})
 				.then(function (res) {
@@ -32,21 +40,19 @@ function Column(id, name) {
 					self.addCard(card);
 				});
 
-			self.addCard(new Card(cardName));
 		}
+
+
 	});	
 }
 
 Column.prototype = {
 	addCard: function(card) {
 		this.element.querySelector('ul').appendChild(card.element);
-		console.dir(this.element.querySelector('ul'));
-		console.dir(card);
-		console.log(this.element.querySelector('ul').appendChild(card.element))
 	  },
 	removeColumn: function () {
 		let self = this;
-		fetch(prefix + baseUrl + '/column/' + self.id, { method: 'DELETE', headers: myHeaders, cache: 'no-store' })
+		fetch(baseUrl + '/column/' + self.id, { method: 'DEletE', headers: myHeaders, cache: 'no-store' })
 			.then(function (resp) {
 				return resp.json();
 			})

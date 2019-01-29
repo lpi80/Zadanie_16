@@ -1,4 +1,4 @@
-var board = {
+let board = {
     name: 'Tablica Kanban',
     addColumn: function (column) {
         this.element.appendChild(column.element);
@@ -13,25 +13,24 @@ document.querySelector('#board .create-column').addEventListener('click', functi
 
     data.append('name', name);
  
-    fetch(prefix + baseUrl + '/column', {
+    fetch(baseUrl + '/column', {
         method: 'POST',
         headers: myHeaders,
-        cache: 'no-store',
         body: data,
     })
         .then(function (resp) {
             return resp.json();
         })
         .then(function (resp) {
-            var column = new Column(resp.id, name);
+            let column = new Column(resp.id, name);
             board.addColumn(column);
         });
 });
 
 
 function initSortable(id) {
-    var el = document.getElementById(id);
-    var sortable = Sortable.create(el, {
+    const el = document.getElementById(id);
+    let sortable = Sortable.create(el, {
         group: 'kanban',
         sort: true
     });
