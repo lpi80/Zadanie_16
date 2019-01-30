@@ -1,18 +1,29 @@
+const prefix = "https://cors-anywhere.herokuapp.com/";
+
 const tweetLink = "https://twitter.com/intent/tweet?text=";
-const quoteUrl = "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1";
+const quoteUrl = prefix + "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1";
 
 function getQuote() {
     fetch(quoteUrl, { cache: "no-store" })
         .then(function(resp) {
             return resp.json();
         })
-        .then(createTweet);
+        .then(createTweet)
+        .catch(function(error) { 
+            console.dir(error);
+            alert('Blad komunikacji: ' + error); 
+        });
 }
 
-function createTweet(input) {
-        const data = input[0];
 
-        let dataElement = document.createElement('div');
+function createTweet(input) {
+        if (!input.length) {
+            alert("Coś poszło nie tak")
+            return
+        }
+
+        const data = input[0];
+        const dataElement = document.createElement('div');
         dataElement.innerHTML = data.content;
         const quoteText = dataElement.innerText.trim();
         let quoteAuthor = data.title;
